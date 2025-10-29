@@ -23,19 +23,190 @@ The chatbot can:
 ```
 restaurant-chatbot/
 │
+├── .streamlit/
+│   └── config.toml      # Streamlit theme configuration
 ├── chatbot.py           # Core chatbot logic with LangChain agents
 ├── app.py              # Streamlit web interface
 ├── requirements.txt    # Python dependencies
 ├── .env.example        # Environment variables template
+├── .gitignore          # Git ignore file
 └── README.md          # Project documentation
 ```
+
+---
+
+## 🔧 Step 0: Install Python and Git
+
+Before starting, you need to install Python and Git on your system.
+
+### 🐍 Installing Python
+
+#### **Windows:**
+
+1. **Download Python:**
+   - Visit [python.org/downloads](https://www.python.org/downloads/)
+   - Click "Download Python 3.x.x" (latest version)
+
+2. **Run the Installer:**
+   - ⚠️ **IMPORTANT**: Check "Add Python to PATH" during installation
+   - Click "Install Now"
+   - Wait for installation to complete
+
+3. **Verify Installation:**
+   ```cmd
+   python --version
+   ```
+   You should see something like `Python 3.11.x`
+
+#### **macOS:**
+
+**Option 1: Using Official Installer (Recommended)**
+1. **Download Python:**
+   - Visit [python.org/downloads](https://www.python.org/downloads/)
+   - Download the macOS installer
+
+2. **Run the Installer:**
+   - Open the downloaded `.pkg` file
+   - Follow the installation wizard
+
+3. **Verify Installation:**
+   ```bash
+   python3 --version
+   ```
+
+**Option 2: Using Homebrew**
+```bash
+# Install Homebrew if not already installed
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Python
+brew install python
+
+# Verify installation
+python3 --version
+```
+
+#### **Linux (Ubuntu/Debian):**
+
+```bash
+# Update package list
+sudo apt update
+
+# Install Python 3 and pip
+sudo apt install python3 python3-pip python3-venv
+
+# Verify installation
+python3 --version
+pip3 --version
+```
+
+#### **Linux (Fedora/RHEL/CentOS):**
+
+```bash
+# Install Python 3
+sudo dnf install python3 python3-pip
+
+# Verify installation
+python3 --version
+pip3 --version
+```
+
+---
+
+### 📦 Installing Git
+
+#### **Windows:**
+
+1. **Download Git:**
+   - Visit [git-scm.com/download/win](https://git-scm.com/download/win)
+   - Download will start automatically
+
+2. **Run the Installer:**
+   - Use default settings (recommended)
+   - Click "Next" through the wizard
+
+3. **Verify Installation:**
+   ```cmd
+   git --version
+   ```
+
+**Alternative: Using Winget (Windows Package Manager)**
+```powershell
+winget install Git.Git
+```
+
+#### **macOS:**
+
+**Option 1: Using Xcode Command Line Tools (Recommended)**
+```bash
+# This will prompt to install Git
+git --version
+
+# Or explicitly install
+xcode-select --install
+```
+
+**Option 2: Using Homebrew**
+```bash
+brew install git
+```
+
+**Verify Installation:**
+```bash
+git --version
+```
+
+#### **Linux (Ubuntu/Debian):**
+
+```bash
+# Install Git
+sudo apt update
+sudo apt install git
+
+# Verify installation
+git --version
+```
+
+#### **Linux (Fedora/RHEL/CentOS):**
+
+```bash
+# Install Git
+sudo dnf install git
+
+# Verify installation
+git --version
+```
+
+---
+
+### ✅ Verification Checklist
+
+After installation, verify everything is working:
+
+**Windows:**
+```cmd
+python --version
+pip --version
+git --version
+```
+
+**Mac/Linux:**
+```bash
+python3 --version
+pip3 --version
+git --version
+```
+
+All commands should return version numbers without errors.
+
+---
 
 ## 🚀 Complete Setup Instructions
 
 ### Prerequisites
-- Python 3.8 or higher installed on your system
-- Git installed on your system
-- A Google account (for Gemini API access)
+- ✅ Python 3.8 or higher installed on your system (see Step 0 above)
+- ✅ Git installed on your system (see Step 0 above)
+- ✅ A Google account (for Gemini API access)
 
 ---
 
@@ -102,17 +273,91 @@ Copy-Item .env.example .env
 
 ### 3.2: Add Your API Key
 
-Open the `.env` file in a text editor and replace `your-api-key-here` with your actual Gemini API key:
+Open the `.env` file in a text editor and replace `your_google_gemini_api_key_here` with your actual Gemini API key:
 
+**Before:**
 ```
-GOOGLE_API_KEY=AIzaSyBBLOSLFjHL7NJlpK53M_gAgfk059Gr51M
+GOOGLE_API_KEY=your_google_gemini_api_key_here
 ```
 
-**⚠️ SECURITY WARNING**: Never commit the `.env` file to Git! It's already in `.gitignore`.
+**After:**
+```
+GOOGLE_API_KEY=AIzaSy*************************
+```
+
+**⚠️ SECURITY WARNING**: 
+- Never commit the `.env` file to Git! It's already in `.gitignore`.
+- Never share your API key publicly
+- Keep your `.env` file secure and local to your machine
 
 ---
 
-## 🐍 Step 4: Set Up Virtual Environment
+## 🎨 Step 4: Configure Streamlit Theme (Optional but Recommended)
+
+This step locks the app to dark theme, regardless of your system settings.
+
+### 4.1: Create .streamlit Directory
+
+In the project root directory, create a `.streamlit` folder:
+
+**On Mac/Linux:**
+```bash
+mkdir .streamlit
+```
+
+**On Windows (Command Prompt):**
+```cmd
+mkdir .streamlit
+```
+
+**On Windows (PowerShell):**
+```powershell
+New-Item -ItemType Directory -Path .streamlit
+```
+
+### 4.2: Create config.toml File
+
+Create a file named `config.toml` inside the `.streamlit` folder with the following content:
+
+**On Mac/Linux:**
+```bash
+cat > .streamlit/config.toml << 'EOF'
+[theme]
+primaryColor = "#2196f3"
+backgroundColor = "#000000"
+secondaryBackgroundColor = "#1a1a1a"
+textColor = "#ffffff"
+font = "sans serif"
+
+[client]
+showSidebarNavigation = false
+EOF
+```
+
+**On Windows:**
+Create the file manually or copy the content below into `.streamlit\config.toml`:
+
+```toml
+[theme]
+primaryColor = "#2196f3"
+backgroundColor = "#000000"
+secondaryBackgroundColor = "#1a1a1a"
+textColor = "#ffffff"
+font = "sans serif"
+
+[client]
+showSidebarNavigation = false
+```
+
+**What this does:**
+- Sets a permanent black background
+- Configures blue accent colors
+- Sets white text for readability
+- Prevents theme from changing with system settings
+
+---
+
+## 🐍 Step 5: Set Up Virtual Environment
 
 A virtual environment keeps your project dependencies isolated from other Python projects.
 
@@ -158,7 +403,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ---
 
-## 📦 Step 5: Install Dependencies
+## 📦 Step 6: Install Dependencies
 
 With your virtual environment activated, install the required packages:
 
@@ -176,7 +421,7 @@ This will install:
 
 ---
 
-## ▶️ Step 6: Run the Application
+## ▶️ Step 7: Run the Application
 
 With everything set up, start the Streamlit app:
 
@@ -193,20 +438,35 @@ streamlit run app.py
 
 ---
 
-## 🎮 Step 7: Use the Chatbot
+## 🎮 Step 8: Use the Chatbot
 
-### 7.1: Configure the Chatbot
+### 8.1: Initialize the Chatbot
 
-1. In the sidebar (left side), enter your Google Gemini API key
-2. Click the **"Initialize Chatbot"** button
-3. Wait for the success message: "✅ Chatbot initialized successfully!"
+1. The app will automatically load your API key from the `.env` file
+2. You should see "✅ API Key loaded from .env file" in the sidebar
+3. Click the **"Initialize Chatbot"** button in the sidebar
+4. Wait for the success message: "✅ Chatbot initialized successfully!"
 
-### 7.2: Start Chatting
+**Troubleshooting:**
+- If you see "❌ API Key not found!", make sure your `.env` file is in the project root directory
+- If initialization fails, check that your API key is correct in the `.env` file
+- Restart the Streamlit app after making changes to `.env`
+
+### 8.2: Start Chatting
 
 Type a message in the input box at the bottom, such as:
 - "Show me Indian restaurants"
 - "Tell me about Spice Palace"
 - "Can I book a table for 4 at Pizza Bella on 2024-11-15?"
+
+### 8.3: Enjoy the Dark Theme!
+
+The UI features:
+- **Black background** for reduced eye strain
+- **Colored message bubbles** with white text for better readability
+- **Blue bubbles** for your messages
+- **Green bubbles** for bot responses
+- **Theme stays consistent** regardless of system light/dark mode
 
 ---
 
@@ -222,40 +482,40 @@ To stop the Streamlit server:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                          User Interface                          │
-│                         (Streamlit App)                          │
+│                          User Interface                         │
+│                         (Streamlit App)                         │
 └────────────────────────────┬────────────────────────────────────┘
                              │
                              ↓
 ┌─────────────────────────────────────────────────────────────────┐
-│                    RestaurantChatbot Class                       │
-│                        (chatbot.py)                              │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │              LangChain Agent Executor                     │  │
-│  │  ┌────────────────────────────────────────────────────┐  │  │
-│  │  │            Google Gemini LLM                        │  │  │
-│  │  │         (Decision Making Brain)                     │  │  │
-│  │  └────────────────────────────────────────────────────┘  │  │
-│  │                           ↓                               │  │
-│  │  ┌────────────────────────────────────────────────────┐  │  │
-│  │  │              Tool Selection                         │  │  │
-│  │  │   (Agent decides which tool to call)                │  │  │
-│  │  └────────────────────────────────────────────────────┘  │  │
-│  └──────────────────────────────────────────────────────────┘  │
-│                             │                                    │
+│                    RestaurantChatbot Class                      │
+│                        (chatbot.py)                             │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │              LangChain Agent Executor                    │   │
+│  │  ┌────────────────────────────────────────────────────┐  │   │
+│  │  │            Google Gemini LLM                       │  │   │
+│  │  │         (Decision Making Brain)                    │  │   │
+│  │  └────────────────────────────────────────────────────┘  │   │
+│  │                           ↓                              │   │
+│  │  ┌────────────────────────────────────────────────────┐  │   │
+│  │  │              Tool Selection                        │  │   │
+│  │  │   (Agent decides which tool to call)               │  │   │
+│  │  └────────────────────────────────────────────────────┘  │   │
+│  └──────────────────────────────────────────────────────────┘   │
+│                             │                                   │
 │         ┌───────────────────┼───────────────────┐               │
 │         ↓                   ↓                   ↓               │
-│  ┌─────────────┐   ┌──────────────┐   ┌─────────────────┐     │
-│  │   Tool 1:   │   │   Tool 2:    │   │    Tool 3:      │     │
-│  │   Search    │   │   Get        │   │    Check        │     │
-│  │ Restaurants │   │ Restaurant   │   │ Reservation     │     │
-│  │ by Cuisine  │   │   Details    │   │ Availability    │     │
-│  └─────────────┘   └──────────────┘   └─────────────────┘     │
+│  ┌─────────────┐   ┌──────────────┐   ┌─────────────────┐       │
+│  │   Tool 1:   │   │   Tool 2:    │   │    Tool 3:      │       │
+│  │   Search    │   │   Get        │   │    Check        │       │
+│  │ Restaurants │   │ Restaurant   │   │ Reservation     │       │
+│  │ by Cuisine  │   │   Details    │   │ Availability    │       │
+│  └─────────────┘   └──────────────┘   └─────────────────┘       │
 │         │                   │                   │               │
 │         └───────────────────┼───────────────────┘               │
-│                             ↓                                    │
-│                    Restaurant Database                           │
-│                  (Simulated with Python dicts)                   │
+│                             ↓                                   │
+│                    Restaurant Database                          │
+│                  (Simulated with Python dicts)                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
