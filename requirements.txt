@@ -1,0 +1,19 @@
+# Core Dependencies
+# ==================
+
+# Streamlit - Web application framework for creating the UI
+streamlit>=1.28.0
+
+# LangChain - Framework for building applications with LLMs
+langchain>=0.1.0
+langchain-google-genai>=0.0.6
+langchain-core>=0.1.0
+
+# Google Generative AI - For accessing Gemini models
+google-generativeai>=0.3.0
+
+# Python Dotenv - For loading environment variables from .env file
+python-dotenv>=1.0.0
+
+# Additional utilities
+typing-extensions>=4.0.0
