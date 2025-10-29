@@ -9,7 +9,6 @@ Features:
 - Responsive design with custom styling
 - Session state management for conversation continuity
 
-Author: Educational Example
 Purpose: Teaching Streamlit UI development for AI chatbots
 """
 
@@ -32,21 +31,38 @@ st.set_page_config(
 # Custom CSS for better UI with black background
 st.markdown("""
     <style>
-    /* Main background */
+    /* Force black background in all modes */
     .main {
-        background-color: #000000;
+        background-color: #000000 !important;
+    }
+    
+    .stApp {
+        background-color: #000000 !important;
     }
     
     /* Sidebar styling */
     [data-testid="stSidebar"] {
-        background-color: #1a1a1a;
+        background-color: #1a1a1a !important;
+    }
+    
+    [data-testid="stSidebar"] > div:first-child {
+        background-color: #1a1a1a !important;
+    }
+    
+    /* Header styling */
+    header[data-testid="stHeader"] {
+        background-color: #000000 !important;
     }
     
     /* Text input styling */
     .stTextInput > div > div > input {
-        background-color: #2a2a2a;
-        color: #ffffff;
-        border: 1px solid #404040;
+        background-color: #2a2a2a !important;
+        color: #ffffff !important;
+        border: 1px solid #404040 !important;
+    }
+    
+    .stTextInput > div > div > input::placeholder {
+        color: #888888 !important;
     }
     
     /* Chat message containers */
@@ -61,73 +77,144 @@ st.markdown("""
     
     /* User message styling - Blue bubble */
     .user-message {
-        background-color: #1e3a5f;
+        background-color: #1e3a5f !important;
         border-left: 5px solid #2196f3;
-        color: #ffffff;
+        color: #ffffff !important;
     }
     
     /* Bot message styling - Green bubble */
     .bot-message {
-        background-color: #1a3d1a;
+        background-color: #1a3d1a !important;
         border-left: 5px solid #4caf50;
-        color: #ffffff;
+        color: #ffffff !important;
     }
     
     /* Message header styling */
     .message-header {
         font-weight: bold;
         margin-bottom: 0.5rem;
-        color: #ffffff;
+        color: #ffffff !important;
     }
     
     /* Message content styling */
     .message-content {
-        color: #ffffff;
+        color: #ffffff !important;
         line-height: 1.6;
     }
     
     /* Title styling */
-    h1, h2, h3 {
+    h1, h2, h3, h4, h5, h6 {
         color: #ffffff !important;
     }
     
-    /* Info box styling */
+    /* Paragraph and text styling */
+    p, span, div, label {
+        color: #ffffff !important;
+    }
+    
+    /* Info/Success/Error/Warning box styling */
     .stAlert {
-        background-color: #2a2a2a;
-        color: #ffffff;
+        background-color: #2a2a2a !important;
+        color: #ffffff !important;
+    }
+    
+    .stAlert > div {
+        color: #ffffff !important;
     }
     
     /* Button styling */
     .stButton > button {
-        background-color: #2196f3;
-        color: white;
-        border: none;
+        background-color: #2196f3 !important;
+        color: white !important;
+        border: none !important;
         border-radius: 0.5rem;
     }
     
     .stButton > button:hover {
-        background-color: #1976d2;
+        background-color: #1976d2 !important;
     }
     
     /* Markdown text in sidebar */
     [data-testid="stSidebar"] .element-container {
-        color: #ffffff;
+        color: #ffffff !important;
     }
     
-    /* Success/Error messages */
+    [data-testid="stSidebar"] p {
+        color: #ffffff !important;
+    }
+    
+    [data-testid="stSidebar"] li {
+        color: #ffffff !important;
+    }
+    
+    /* Success messages */
     .stSuccess {
-        background-color: #1a3d1a;
-        color: #ffffff;
+        background-color: #1a3d1a !important;
+        color: #ffffff !important;
     }
     
+    .stSuccess > div {
+        color: #ffffff !important;
+    }
+    
+    /* Error messages */
     .stError {
-        background-color: #3d1a1a;
-        color: #ffffff;
+        background-color: #3d1a1a !important;
+        color: #ffffff !important;
     }
     
+    .stError > div {
+        color: #ffffff !important;
+    }
+    
+    /* Warning messages */
     .stWarning {
-        background-color: #3d3d1a;
-        color: #ffffff;
+        background-color: #3d3d1a !important;
+        color: #ffffff !important;
+    }
+    
+    .stWarning > div {
+        color: #ffffff !important;
+    }
+    
+    /* Info messages */
+    .stInfo {
+        background-color: #1a2a3d !important;
+        color: #ffffff !important;
+    }
+    
+    .stInfo > div {
+        color: #ffffff !important;
+    }
+    
+    /* Spinner styling */
+    .stSpinner > div {
+        border-top-color: #2196f3 !important;
+    }
+    
+    /* Markdown in main area */
+    .main .element-container {
+        color: #ffffff !important;
+    }
+    
+    /* Override any remaining white backgrounds */
+    div[data-testid="stVerticalBlock"] {
+        background-color: transparent !important;
+    }
+    
+    div[data-testid="column"] {
+        background-color: transparent !important;
+    }
+    
+    /* Expander styling */
+    .streamlit-expanderHeader {
+        background-color: #2a2a2a !important;
+        color: #ffffff !important;
+    }
+    
+    .streamlit-expanderContent {
+        background-color: #1a1a1a !important;
+        color: #ffffff !important;
     }
     </style>
     """, unsafe_allow_html=True)

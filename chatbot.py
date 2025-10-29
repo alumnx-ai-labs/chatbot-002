@@ -6,7 +6,6 @@ This module implements a restaurant recommendation chatbot that can:
 - Provide detailed restaurant information
 - Check reservation availability
 
-Author: Educational Example
 Purpose: Teaching AI agent development with LangChain
 """
 
